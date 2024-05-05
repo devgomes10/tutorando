@@ -6,9 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Star
@@ -29,12 +32,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.tutorando.ui.theme.TutorandoTheme
+import com.example.tutorando.views.FavoritesScreen
+import com.example.tutorando.views.ProfileScreen
+import com.example.tutorando.views.SearchScreen
 
 data class BottomNavigationItem(
     val title: String,
     val selectedIcon: ImageVector,
     val unSelectedIcon: ImageVector,
-    val badgeCount: Int? = null
 )
 
 class MainActivity : ComponentActivity() {
@@ -54,12 +59,11 @@ class MainActivity : ComponentActivity() {
                         title = "Buscar",
                         selectedIcon = Icons.Filled.Search,
                         unSelectedIcon = Icons.Outlined.Search,
-                        badgeCount = 45
                     ),
                     BottomNavigationItem(
                         title = "Histórico",
-                        selectedIcon = Icons.Filled.Star,
-                        unSelectedIcon = Icons.Outlined.Star,
+                        selectedIcon = Icons.Filled.FavoriteBorder,
+                        unSelectedIcon = Icons.Outlined.FavoriteBorder,
                     )
                 )
                 var selectedItemIndex by rememberSaveable {
@@ -77,31 +81,28 @@ class MainActivity : ComponentActivity() {
                                         selected = selectedItemIndex == index,
                                         onClick = {
                                             selectedItemIndex = index
-                                            // navController.navigate(item.title)
                                         },
-                                        label = { Text(text = item.title)},
+                                        label = { Text(text = item.title) },
                                         alwaysShowLabel = false,
                                         icon = {
-                                            BadgedBox(badge = {
-                                                if(item.badgeCount != null) {
-                                                    Badge {
-                                                        Text(text = item.badgeCount.toString())
-                                                    }
-                                                }
-                                            }) {
-                                                Icon(
-                                                    imageVector = if (index == selectedItemIndex) {
-                                                        item.selectedIcon
-                                                    } else item.unSelectedIcon,
-                                                    contentDescription = item.title,
-                                                )
-                                            }
-                                        })
+                                            Icon(
+                                                imageVector = if (index == selectedItemIndex) {
+                                                    item.selectedIcon
+                                                } else item.unSelectedIcon,
+                                                contentDescription = item.title
+                                            )
+                                        }
+                                    )
                                 }
                             }
                         }
                     ) {
-
+                        when (selectedItemIndex) {
+                            0 -> ProfileScreen()
+                            1 -> SearchScreen()
+                            2 -> FavoritesScreen()
+                            else -> Text(text = "Tela não encontrada")
+                        }
                     }
                 }
             }
