@@ -1,4 +1,5 @@
 package com.example.tutorando.views
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
@@ -63,7 +65,16 @@ fun ProfileScreen() {
 
     var selectedRole by remember { mutableStateOf<Role?>(null) }
 
-    var selectedTechnologies by remember { mutableStateOf<List<String>>(emptyList()) }
+    var selectedTechnologies by remember {
+        mutableStateOf(
+            mapOf(
+                "Kotlin" to false,
+                "Swift" to false,
+                "Flutter" to false,
+                "React Native" to false
+            )
+        )
+    }
 
 
     Box(
@@ -171,6 +182,72 @@ fun ProfileScreen() {
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(text = "Selecione as tecnologias:", color = Color.White)
+                        Column {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp)
+                            ) {
+                                Checkbox(
+                                    checked = selectedTechnologies["kotlin"] ?: false,
+                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                )
+                                Text(
+                                    text = "Kotlin",
+                                    modifier = Modifier.padding(start = 8.dp),
+                                    color = Color.White,
+                                )
+                            }
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp)
+                            ) {
+                                Checkbox(
+                                    checked = selectedTechnologies["Swift"] ?: false,
+                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                )
+                                Text(
+                                    text = "Swift",
+                                    modifier = Modifier.padding(start = 8.dp),
+                                    color = Color.White,
+                                )
+                            }
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp)
+                            ) {
+                                Checkbox(
+                                    checked = selectedTechnologies["Flutter"] ?: false,
+                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                )
+                                Text(
+                                    text = "Flutter",
+                                    modifier = Modifier.padding(start = 8.dp),
+                                    color = Color.White,
+                                )
+                            }
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp)
+                            ) {
+                                Checkbox(
+                                    checked = selectedTechnologies["ReactNative"] ?: false,
+                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                )
+                                Text(
+                                    text = "React Native",
+                                    modifier = Modifier.padding(start = 8.dp),
+                                    color = Color.White,
+                                )
+                            }
+                        }
                     }
                 }
             }
