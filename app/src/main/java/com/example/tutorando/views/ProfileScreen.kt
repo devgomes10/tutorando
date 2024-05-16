@@ -51,19 +51,7 @@ fun ProfileScreen() {
         mutableStateOf("")
     }
 
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var phone by remember {
-        mutableStateOf("")
-    }
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var city by remember {
+    var about by remember {
         mutableStateOf("")
     }
 
@@ -202,9 +190,10 @@ fun ProfileScreen() {
                                         Checkbox(
                                             checked = selectedTechnologies["Kotlin"] ?: false,
                                             onCheckedChange = { isChecked ->
-                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
-                                                    this["Kotlin"] = isChecked
-                                                }
+                                                selectedTechnologies =
+                                                    selectedTechnologies.toMutableMap().apply {
+                                                        this["Kotlin"] = isChecked
+                                                    }
                                             }
                                         )
                                         Text(
@@ -223,9 +212,10 @@ fun ProfileScreen() {
                                         Checkbox(
                                             checked = selectedTechnologies["Swift"] ?: false,
                                             onCheckedChange = { isChecked ->
-                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
-                                                    this["Swift"] = isChecked
-                                                }
+                                                selectedTechnologies =
+                                                    selectedTechnologies.toMutableMap().apply {
+                                                        this["Swift"] = isChecked
+                                                    }
                                             }
                                         )
                                         Text(
@@ -244,9 +234,10 @@ fun ProfileScreen() {
                                         Checkbox(
                                             checked = selectedTechnologies["Flutter"] ?: false,
                                             onCheckedChange = { isChecked ->
-                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
-                                                    this["Flutter"] = isChecked
-                                                }
+                                                selectedTechnologies =
+                                                    selectedTechnologies.toMutableMap().apply {
+                                                        this["Flutter"] = isChecked
+                                                    }
                                             }
                                         )
                                         Text(
@@ -265,9 +256,10 @@ fun ProfileScreen() {
                                         Checkbox(
                                             checked = selectedTechnologies["React Native"] ?: false,
                                             onCheckedChange = { isChecked ->
-                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
-                                                    this["React Native"] = isChecked
-                                                }
+                                                selectedTechnologies =
+                                                    selectedTechnologies.toMutableMap().apply {
+                                                        this["React Native"] = isChecked
+                                                    }
                                             }
                                         )
                                         Text(
@@ -279,13 +271,13 @@ fun ProfileScreen() {
                                 }
                                 Spacer(modifier = Modifier.height(16.dp))
                                 OutlinedTextField(
-                                    value = city,
+                                    value = about,
                                     onValueChange = {
-                                        city = it
+                                        about = it
                                     },
                                     modifier = Modifier.fillMaxWidth(),
                                     placeholder = {
-                                        Text(text = "Qual cidade você mora?")
+                                        Text(text = "Conte sobre você")
                                     },
                                     colors = OutlinedTextFieldDefaults.colors(
                                         unfocusedBorderColor = colorResource(id = R.color.blue),
@@ -295,81 +287,15 @@ fun ProfileScreen() {
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                                 )
                                 Spacer(modifier = Modifier.height(16.dp))
-                                OutlinedTextField(
-                                    value = phone,
-                                    onValueChange = {
-                                        phone = it
-                                    },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Qual seu número de telefone?")
-                                    },
-                                    colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
-                                    ),
-                                    shape = RoundedCornerShape(16.dp),
-                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                OutlinedTextField(
-                                    value = password,
-                                    onValueChange = {
-                                        password = it
-                                    },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Qual seu número de telefone?")
-                                    },
-                                    colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
-                                    ),
-                                    shape = RoundedCornerShape(16.dp),
-                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                OutlinedTextField(
-                                    value = password,
-                                    onValueChange = {
-                                        password = it
-                                    },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Digite uma senha")
-                                    },
-                                    colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
-                                    ),
-                                    shape = RoundedCornerShape(16.dp),
-                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                OutlinedTextField(
-                                    value = email,
-                                    onValueChange = {
-                                        email = it
-                                    },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Digite seu email")
-                                    },
-                                    colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
-                                    ),
-                                    shape = RoundedCornerShape(16.dp),
-                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-                                )
-                                ElevatedButton(onClick = { },
+                                ElevatedButton(
+                                    onClick = { },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp),
                                     elevation = ButtonDefaults.elevatedButtonElevation(8.dp),
                                     colors = ButtonDefaults.elevatedButtonColors(Color.Blue)
-                                    ) {
-                                        Text(text = "Confirmar", color = Color.White)
+                                ) {
+                                    Text(text = "Confirmar", color = Color.White)
                                 }
                             }
                         }
