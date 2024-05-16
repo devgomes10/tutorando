@@ -12,12 +12,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
@@ -63,7 +67,7 @@ fun ProfileScreen() {
         mutableStateOf("")
     }
 
-    var selectedRole by remember { mutableStateOf<Role?>(null) }
+    var selectedRole by remember { mutableStateOf<Role?>(Role.MENTOR) }
 
     var selectedTechnologies by remember {
         mutableStateOf(
@@ -80,172 +84,293 @@ fun ProfileScreen() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(vertical = 16.dp)
         ) {
-            // Header
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(160.dp)
-                    .background(colorResource(id = R.color.blue))
-            ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.profile_image),
-                    contentDescription = "Imagem de perfil",
-                    modifier = Modifier
-                        .size(60.dp)
-                        .clip(shape = CircleShape),
-                    contentScale = ContentScale.Crop,
-                )
-            }
-            // Form
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
-            ) {
-                Card(
-                    modifier = Modifier
-                        .offset(y = (-30).dp)
-                        .fillMaxWidth(),
-                    colors = CardDefaults
-                        .cardColors(containerColor = Color(0xff7989fc)),
-                    elevation = CardDefaults.cardElevation(4.dp)
+            item {
+                Column(
+                    modifier = Modifier.fillMaxSize()
                 ) {
+                    // Header
                     Column(
-                        modifier = Modifier.padding(
-                            vertical = 16.dp,
-                            horizontal = 32.dp
-                        )
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(160.dp)
+                            .background(colorResource(id = R.color.blue))
                     ) {
-                        OutlinedTextField(
-                            value = name,
-                            onValueChange = {
-                                name = it
-                            },
-                            modifier = Modifier.fillMaxWidth(),
-                            placeholder = {
-                                Text(text = "Qual seu nome?")
-                            },
-                            colors = OutlinedTextFieldDefaults.colors(
-                                unfocusedBorderColor = colorResource(id = R.color.blue),
-                                focusedBorderColor = colorResource(id = R.color.blue)
-                            ),
-                            shape = RoundedCornerShape(16.dp),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Image(
+                            painter = painterResource(id = R.drawable.profile_image),
+                            contentDescription = "Imagem de perfil",
+                            modifier = Modifier
+                                .size(100.dp)
+                                .clip(shape = CircleShape),
+                            contentScale = ContentScale.Crop,
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(text = "Selecione sua função:", color = Color.White)
-                        Column {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
+                    }
+                    // Form
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 32.dp)
+                    ) {
+                        Card(
+                            modifier = Modifier
+                                .offset(y = (-30).dp)
+                                .fillMaxWidth(),
+                            colors = CardDefaults
+                                .cardColors(containerColor = Color(0xff7989fc)),
+                            elevation = CardDefaults.cardElevation(4.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(
+                                    vertical = 16.dp,
+                                    horizontal = 32.dp
+                                )
                             ) {
-                                RadioButton(
-                                    selected = selectedRole == Role.MENTOR,
-                                    onClick = { selectedRole = Role.MENTOR },
-                                    colors = RadioButtonDefaults.colors(
-                                        selectedColor = colorResource(id = R.color.blue)
-                                    )
+                                OutlinedTextField(
+                                    value = name,
+                                    onValueChange = {
+                                        name = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Qual seu nome?")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                                 )
-                                Text(
-                                    text = "Mentor",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
-                                )
-                            }
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(text = "Selecione sua função:", color = Color.White)
+                                Column {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        RadioButton(
+                                            selected = selectedRole == Role.MENTOR,
+                                            onClick = { selectedRole = Role.MENTOR },
+                                            colors = RadioButtonDefaults.colors(
+                                                selectedColor = colorResource(id = R.color.blue)
+                                            )
+                                        )
+                                        Text(
+                                            text = "Mentor",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
 
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                RadioButton(
-                                    selected = selectedRole == Role.APRENDIZ,
-                                    onClick = { selectedRole = Role.APRENDIZ },
-                                    colors = RadioButtonDefaults.colors(
-                                        selectedColor = colorResource(id = R.color.blue)
-                                    )
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        RadioButton(
+                                            selected = selectedRole == Role.APRENDIZ,
+                                            onClick = { selectedRole = Role.APRENDIZ },
+                                            colors = RadioButtonDefaults.colors(
+                                                selectedColor = colorResource(id = R.color.blue)
+                                            )
+                                        )
+                                        Text(
+                                            text = "Aprendiz",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(text = "Selecione as tecnologias:", color = Color.White)
+                                Column {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        Checkbox(
+                                            checked = selectedTechnologies["Kotlin"] ?: false,
+                                            onCheckedChange = { isChecked ->
+                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                                    this["Kotlin"] = isChecked
+                                                }
+                                            }
+                                        )
+                                        Text(
+                                            text = "Kotlin",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        Checkbox(
+                                            checked = selectedTechnologies["Swift"] ?: false,
+                                            onCheckedChange = { isChecked ->
+                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                                    this["Swift"] = isChecked
+                                                }
+                                            }
+                                        )
+                                        Text(
+                                            text = "Swift",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        Checkbox(
+                                            checked = selectedTechnologies["Flutter"] ?: false,
+                                            onCheckedChange = { isChecked ->
+                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                                    this["Flutter"] = isChecked
+                                                }
+                                            }
+                                        )
+                                        Text(
+                                            text = "Flutter",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
+
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                    ) {
+                                        Checkbox(
+                                            checked = selectedTechnologies["React Native"] ?: false,
+                                            onCheckedChange = { isChecked ->
+                                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                                    this["React Native"] = isChecked
+                                                }
+                                            }
+                                        )
+                                        Text(
+                                            text = "React Native",
+                                            modifier = Modifier.padding(start = 8.dp),
+                                            color = Color.White,
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OutlinedTextField(
+                                    value = city,
+                                    onValueChange = {
+                                        city = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Qual cidade você mora?")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                                 )
-                                Text(
-                                    text = "Aprendiz",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OutlinedTextField(
+                                    value = phone,
+                                    onValueChange = {
+                                        phone = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Qual seu número de telefone?")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
                                 )
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(text = "Selecione as tecnologias:", color = Color.White)
-                        Column {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                Checkbox(
-                                    checked = selectedTechnologies["kotlin"] ?: false,
-                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OutlinedTextField(
+                                    value = password,
+                                    onValueChange = {
+                                        password = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Qual seu número de telefone?")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
                                 )
-                                Text(
-                                    text = "Kotlin",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OutlinedTextField(
+                                    value = password,
+                                    onValueChange = {
+                                        password = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Digite uma senha")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                                 )
-                            }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                Checkbox(
-                                    checked = selectedTechnologies["Swift"] ?: false,
-                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OutlinedTextField(
+                                    value = email,
+                                    onValueChange = {
+                                        email = it
+                                    },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    placeholder = {
+                                        Text(text = "Digite seu email")
+                                    },
+                                    colors = OutlinedTextFieldDefaults.colors(
+                                        unfocusedBorderColor = colorResource(id = R.color.blue),
+                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                    ),
+                                    shape = RoundedCornerShape(16.dp),
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                                 )
-                                Text(
-                                    text = "Swift",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
-                                )
-                            }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                Checkbox(
-                                    checked = selectedTechnologies["Flutter"] ?: false,
-                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
-                                )
-                                Text(
-                                    text = "Flutter",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
-                                )
-                            }
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                Checkbox(
-                                    checked = selectedTechnologies["ReactNative"] ?: false,
-                                    onCheckedChange = { isChecked -> selectedTechnologies = selectedTechnologies.toMutableMap().apply { this["Kotlin"] = isChecked }},
-                                )
-                                Text(
-                                    text = "React Native",
-                                    modifier = Modifier.padding(start = 8.dp),
-                                    color = Color.White,
-                                )
+                                ElevatedButton(onClick = { },
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    elevation = ButtonDefaults.elevatedButtonElevation(8.dp),
+                                    colors = ButtonDefaults.elevatedButtonColors(Color.Blue)
+                                    ) {
+                                        Text(text = "Confirmar", color = Color.White)
+                                }
                             }
                         }
                     }
