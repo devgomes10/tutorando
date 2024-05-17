@@ -1,4 +1,6 @@
 package com.example.tutorando.views
 
-class SettingsScreen {
-}
+import androidx.compose.runtime.Composable
+
+@Composable
+fun SettingsScreen () {}
