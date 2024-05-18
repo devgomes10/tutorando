@@ -87,7 +87,7 @@ fun ProfileScreen() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(160.dp)
-                            .background(colorResource(id = R.color.blue))
+                            .background(colorResource(id = R.color.lightPurple))
                     ) {
                         Spacer(modifier = Modifier.height(16.dp))
                         Image(
@@ -110,7 +110,7 @@ fun ProfileScreen() {
                                 .offset(y = (-30).dp)
                                 .fillMaxWidth(),
                             colors = CardDefaults
-                                .cardColors(containerColor = Color(0xff7989fc)),
+                                .cardColors(colorResource(id = R.color.purple)),
                             elevation = CardDefaults.cardElevation(4.dp)
                         ) {
                             Column(
@@ -125,12 +125,12 @@ fun ProfileScreen() {
                                         name = it
                                     },
                                     modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Qual seu nome?")
+                                    label = {
+                                        Text(text = "Qual seu nome?", color = Color.White)
                                     },
                                     colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                        unfocusedBorderColor = colorResource(id = R.color.lightPurple),
+                                        focusedBorderColor = colorResource(id = R.color.lightPurple)
                                     ),
                                     shape = RoundedCornerShape(16.dp),
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -148,7 +148,7 @@ fun ProfileScreen() {
                                             selected = selectedRole == Role.MENTOR,
                                             onClick = { selectedRole = Role.MENTOR },
                                             colors = RadioButtonDefaults.colors(
-                                                selectedColor = colorResource(id = R.color.blue)
+                                                selectedColor = colorResource(id = R.color.lightPurple)
                                             )
                                         )
                                         Text(
@@ -168,7 +168,7 @@ fun ProfileScreen() {
                                             selected = selectedRole == Role.APRENDIZ,
                                             onClick = { selectedRole = Role.APRENDIZ },
                                             colors = RadioButtonDefaults.colors(
-                                                selectedColor = colorResource(id = R.color.blue)
+                                                selectedColor = colorResource(id = R.color.lightPurple)
                                             )
                                         )
                                         Text(
@@ -276,12 +276,12 @@ fun ProfileScreen() {
                                         about = it
                                     },
                                     modifier = Modifier.fillMaxWidth(),
-                                    placeholder = {
-                                        Text(text = "Conte sobre você")
+                                    label = {
+                                        Text(text = "Conte sobre você", color = Color.White)
                                     },
                                     colors = OutlinedTextFieldDefaults.colors(
-                                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                                        focusedBorderColor = colorResource(id = R.color.blue)
+                                        unfocusedBorderColor = colorResource(id = R.color.lightPurple),
+                                        focusedBorderColor = colorResource(id = R.color.lightPurple)
                                     ),
                                     shape = RoundedCornerShape(16.dp),
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -293,7 +293,7 @@ fun ProfileScreen() {
                                         .fillMaxWidth()
                                         .padding(16.dp),
                                     elevation = ButtonDefaults.elevatedButtonElevation(8.dp),
-                                    colors = ButtonDefaults.elevatedButtonColors(Color.Blue)
+                                    colors = ButtonDefaults.elevatedButtonColors(colorResource(id = R.color.lightPurple))
                                 ) {
                                     Text(text = "Confirmar", color = Color.White)
                                 }

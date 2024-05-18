@@ -65,14 +65,14 @@ fun FavoritesScreen() {
                                    }
                     },
                     colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = colorResource(id = R.color.blue),
-                        focusedBorderColor = colorResource(id = R.color.blue)
+                        unfocusedBorderColor = colorResource(id = R.color.purple),
+                        focusedBorderColor = colorResource(id = R.color.purple)
                     ),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn() {
+                LazyColumn {
                     items(getFavorites()) {
                         Text(text = it.name)
                     }
