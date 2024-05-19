@@ -1,58 +1,57 @@
-package com.example.tutorando.views
+package com.example.tutorando.views.authentication
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.tutorando.R
+import com.example.tutorando.views.Role
 
 @Composable
-fun ProfileScreen() {
+fun Register() {
 
     var name by remember {
         mutableStateOf("")
     }
 
-    var about by remember {
+    var city by remember {
+        mutableStateOf("")
+    }
+
+    var phone by remember {
+        mutableStateOf("")
+    }
+
+    var email by remember {
+        mutableStateOf("")
+    }
+
+    var password by remember {
         mutableStateOf("")
     }
 
@@ -81,24 +80,52 @@ fun ProfileScreen() {
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.profile_image),
-                    contentDescription = "Imagem de perfil",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(shape = CircleShape),
-                    contentScale = ContentScale.Crop,
-                )
-                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "Faça seu cadastro", fontSize = 32.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(28.dp))
                 OutlinedTextField(
                     value = name,
                     onValueChange = {
-                        name = it
+                                    name = it
+                    },
+                    label = { Text(text = "Nome") },
+                    placeholder = {
+                        Text(
+                            text = "Digite seu nome"
+                        )
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(text = "Qual seu nome?")
+                    shape = RoundedCornerShape(16.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = city,
+                    onValueChange = {
+                                    city = it
                     },
+                    label = { Text(text = "Cidade") },
+                    placeholder = {
+                        Text(
+                            text = "Qual cidade você mora?"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = phone,
+                    onValueChange = {
+                                    phone = it
+                    },
+                    label = { Text(text = "Telefone") },
+                    placeholder = {
+                        Text(
+                            text = "Qual seu telefone?"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
@@ -236,34 +263,45 @@ fun ProfileScreen() {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
-                    value = about,
+                    value = email,
                     onValueChange = {
-                        about = it
+                                    email = it
+                    },
+                    label = { Text(text = "E-mail") },
+                    placeholder = {
+                        Text(
+                            text = "insira seu email"
+                        )
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(text = "Conte sobre você")
-                    },
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                ElevatedButton(
-                    onClick = { },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    elevation = ButtonDefaults.elevatedButtonElevation(8.dp),
-                    colors = ButtonDefaults.elevatedButtonColors(colorResource(id = R.color.lightPurple))
-                ) {
-                    Text(text = "Confirmar", color = Color.White)
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = {
+                                    password = it
+                    },
+                    label = { Text(text = "Senha") },
+                    placeholder = {
+                        Text(
+                            text = "Crie uma senha"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = { /*TODO*/ }) {
+                    Text(text = "Confirmar")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = { /*TODO*/ }) {
+                    Text(text = "Voltar")
                 }
             }
         }
     }
-}
-
-enum class Role {
-    MENTOR,
-    APRENDIZ
 }

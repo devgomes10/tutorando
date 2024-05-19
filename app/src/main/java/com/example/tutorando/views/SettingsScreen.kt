@@ -61,10 +61,6 @@ fun SettingsScreen() {
             label = {
                 Text(text = "Sua Senha de acesso")
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.purple),
-                focusedBorderColor = colorResource(id = R.color.purple)
-            ),
             shape = RoundedCornerShape(16.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
@@ -78,10 +74,6 @@ fun SettingsScreen() {
             placeholder = {
                 Text(text = "Seu email de acesso")
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.purple),
-                focusedBorderColor = colorResource(id = R.color.purple)
-            ),
             shape = RoundedCornerShape(16.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
@@ -97,10 +89,6 @@ fun SettingsScreen() {
             placeholder = {
                 Text(text = "Cidade")
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.purple),
-                focusedBorderColor = colorResource(id = R.color.purple)
-            ),
             shape = RoundedCornerShape(16.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
@@ -114,10 +102,6 @@ fun SettingsScreen() {
             placeholder = {
                 Text(text = "Telefone")
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = colorResource(id = R.color.purple),
-                focusedBorderColor = colorResource(id = R.color.purple)
-            ),
             shape = RoundedCornerShape(16.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
