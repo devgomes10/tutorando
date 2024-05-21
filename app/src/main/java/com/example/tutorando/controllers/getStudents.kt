@@ -1,10 +1,10 @@
 package com.example.tutorando.controllers
 
-import com.example.tutorando.models.Person
+import com.example.tutorando.models.Student
 
-fun getFavorites(): List<Person> {
+fun getStudents(): List<Student> {
     return listOf(
-        Person(
+        Student(
             id = 1,
             name = "João",
             skills = listOf("Kotlin", "Flutter"),
@@ -12,7 +12,7 @@ fun getFavorites(): List<Person> {
             city = "São Paulo",
             phone = 11912345678
         ),
-        Person(
+        Student(
             id = 2,
             name = "Maria",
             skills = listOf("Swift", "React Native"),
@@ -20,7 +20,7 @@ fun getFavorites(): List<Person> {
             city = "Rio de Janeiro",
             phone = 21987654321
         ),
-        Person(
+        Student(
             id = 3,
             name = "Pedro",
             skills = listOf("Flutter", "Kotlin"),
@@ -28,7 +28,7 @@ fun getFavorites(): List<Person> {
             city = "Belo Horizonte",
             phone = 31987651234
         ),
-        Person(
+        Student(
             id = 4,
             name = "Ana",
             skills = listOf("Kotlin", "React Native"),
@@ -36,7 +36,7 @@ fun getFavorites(): List<Person> {
             city = "Curitiba",
             phone = 41912344321
         ),
-        Person(
+        Student(
             id = 5,
             name = "Carlos",
             skills = listOf("Swift", "Flutter"),
@@ -44,7 +44,7 @@ fun getFavorites(): List<Person> {
             city = "Salvador",
             phone = 71998765432
         ),
-        Person(
+        Student(
             id = 6,
             name = "Fernanda",
             skills = listOf("React Native", "Kotlin"),
@@ -52,7 +52,7 @@ fun getFavorites(): List<Person> {
             city = "Fortaleza",
             phone = 85912349876
         ),
-        Person(
+        Student(
             id = 7,
             name = "Rafael",
             skills = listOf("Flutter", "Swift"),
@@ -60,7 +60,7 @@ fun getFavorites(): List<Person> {
             city = "Porto Alegre",
             phone = 51998764321
         ),
-        Person(
+        Student(
             id = 8,
             name = "Camila",
             skills = listOf("Kotlin", "Swift"),
@@ -68,7 +68,7 @@ fun getFavorites(): List<Person> {
             city = "Recife",
             phone = 81987653210
         ),
-        Person(
+        Student(
             id = 9,
             name = "Lucas",
             skills = listOf("React Native", "Flutter"),
@@ -76,7 +76,7 @@ fun getFavorites(): List<Person> {
             city = "Manaus",
             phone = 92912340987
         ),
-        Person(
+        Student(
             id = 10,
             name = "Larissa",
             skills = listOf("Swift", "Kotlin"),
@@ -84,7 +84,7 @@ fun getFavorites(): List<Person> {
             city = "Belém",
             phone = 91987654567
         ),
-        Person(
+        Student(
             id = 11,
             name = "Gustavo",
             skills = listOf("Flutter", "React Native"),
@@ -92,7 +92,7 @@ fun getFavorites(): List<Person> {
             city = "Goiânia",
             phone = 62912349876
         ),
-        Person(
+        Student(
             id = 12,
             name = "Beatriz",
             skills = listOf("Kotlin", "Flutter"),
@@ -100,7 +100,7 @@ fun getFavorites(): List<Person> {
             city = "Florianópolis",
             phone = 48987654321
         ),
-        Person(
+        Student(
             id = 13,
             name = "André",
             skills = listOf("Swift", "React Native"),
@@ -108,7 +108,7 @@ fun getFavorites(): List<Person> {
             city = "Natal",
             phone = 84912345678
         ),
-        Person(
+        Student(
             id = 14,
             name = "Patrícia",
             skills = listOf("Flutter", "Kotlin"),
@@ -116,7 +116,7 @@ fun getFavorites(): List<Person> {
             city = "Vitória",
             phone = 27987653210
         ),
-        Person(
+        Student(
             id = 15,
             name = "Rodrigo",
             skills = listOf("React Native", "Swift"),

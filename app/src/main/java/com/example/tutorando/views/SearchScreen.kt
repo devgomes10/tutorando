@@ -10,9 +10,8 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +22,17 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tutorando.R
+import com.example.tutorando.controllers.getStudents
+import com.example.tutorando.models.FavoritesViewModel
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(favoritesViewModel: FavoritesViewModel = viewModel()) {
+    var studentIndex by remember { mutableStateOf(0) }
+    val students = getStudents()
+    val currentStudent = students[studentIndex]
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -48,14 +54,16 @@ fun SearchScreen() {
                     contentScale = ContentScale.Crop,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Maria Silva", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(text = currentStudent.name, fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            studentIndex = (studentIndex + 1) % students.size
+                        },
                         modifier = Modifier
                             .size(80.dp)
                             .clip(CircleShape)
@@ -70,7 +78,9 @@ fun SearchScreen() {
                     }
                     Spacer(modifier = Modifier.width(18.dp))
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            favoritesViewModel.addFavorite(currentStudent)
+                        },
                         modifier = Modifier
                             .size(80.dp)
                             .clip(CircleShape)
@@ -85,9 +95,13 @@ fun SearchScreen() {
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Kotlin | Flutter", fontSize = 18.sp, fontStyle = FontStyle.Italic)
+                Text(text = currentStudent.skills.joinToString(" | "), fontSize = 18.sp, fontStyle = FontStyle.Italic)
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Olá, estou procurando um mentor para me instruir na minha jornada como desenvolvedora mobile. Quero que o foco seja kotlin e Flutter")
+                Text(text = currentStudent.about)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = currentStudent.city, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = currentStudent.phone.toString(), fontWeight = FontWeight.Bold)
             }
         }
     }

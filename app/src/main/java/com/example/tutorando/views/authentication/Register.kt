@@ -33,30 +33,13 @@ import com.example.tutorando.R
 import com.example.tutorando.views.Role
 
 @Composable
-fun Register() {
-
-    var name by remember {
-        mutableStateOf("")
-    }
-
-    var city by remember {
-        mutableStateOf("")
-    }
-
-    var phone by remember {
-        mutableStateOf("")
-    }
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
+fun Register(onBack: () -> Unit) {
+    var name by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var selectedRole by remember { mutableStateOf<Role?>(Role.MENTOR) }
-
     var selectedTechnologies by remember {
         mutableStateOf(
             mapOf(
@@ -84,15 +67,9 @@ fun Register() {
                 Spacer(modifier = Modifier.height(28.dp))
                 OutlinedTextField(
                     value = name,
-                    onValueChange = {
-                                    name = it
-                    },
+                    onValueChange = { name = it },
                     label = { Text(text = "Nome") },
-                    placeholder = {
-                        Text(
-                            text = "Digite seu nome"
-                        )
-                    },
+                    placeholder = { Text(text = "Digite seu nome") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -100,15 +77,9 @@ fun Register() {
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = city,
-                    onValueChange = {
-                                    city = it
-                    },
+                    onValueChange = { city = it },
                     label = { Text(text = "Cidade") },
-                    placeholder = {
-                        Text(
-                            text = "Qual cidade você mora?"
-                        )
-                    },
+                    placeholder = { Text(text = "Qual cidade você mora?") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -116,15 +87,9 @@ fun Register() {
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = phone,
-                    onValueChange = {
-                                    phone = it
-                    },
+                    onValueChange = { phone = it },
                     label = { Text(text = "Telefone") },
-                    placeholder = {
-                        Text(
-                            text = "Qual seu telefone?"
-                        )
-                    },
+                    placeholder = { Text(text = "Qual seu telefone?") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -141,14 +106,9 @@ fun Register() {
                         RadioButton(
                             selected = selectedRole == Role.MENTOR,
                             onClick = { selectedRole = Role.MENTOR },
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = colorResource(id = R.color.lightPurple)
-                            )
+                            colors = RadioButtonDefaults.colors(selectedColor = colorResource(id = R.color.lightPurple))
                         )
-                        Text(
-                            text = "Mentor",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "Mentor", modifier = Modifier.padding(start = 8.dp))
                     }
 
                     Row(
@@ -160,14 +120,9 @@ fun Register() {
                         RadioButton(
                             selected = selectedRole == Role.APRENDIZ,
                             onClick = { selectedRole = Role.APRENDIZ },
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = colorResource(id = R.color.lightPurple)
-                            )
+                            colors = RadioButtonDefaults.colors(selectedColor = colorResource(id = R.color.lightPurple))
                         )
-                        Text(
-                            text = "Aprendiz",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "Aprendiz", modifier = Modifier.padding(start = 8.dp))
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -183,16 +138,12 @@ fun Register() {
                             checked = selectedTechnologies["Kotlin"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
-                                    selectedTechnologies.toMutableMap().apply {
-                                        this["Kotlin"] = isChecked
-                                    }
+                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                    this["Kotlin"] = isChecked
+                                }
                             }
                         )
-                        Text(
-                            text = "Kotlin",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "Kotlin", modifier = Modifier.padding(start = 8.dp))
                     }
 
                     Row(
@@ -205,16 +156,12 @@ fun Register() {
                             checked = selectedTechnologies["Swift"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
-                                    selectedTechnologies.toMutableMap().apply {
-                                        this["Swift"] = isChecked
-                                    }
+                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                    this["Swift"] = isChecked
+                                }
                             }
                         )
-                        Text(
-                            text = "Swift",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "Swift", modifier = Modifier.padding(start = 8.dp))
                     }
 
                     Row(
@@ -227,16 +174,12 @@ fun Register() {
                             checked = selectedTechnologies["Flutter"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
-                                    selectedTechnologies.toMutableMap().apply {
-                                        this["Flutter"] = isChecked
-                                    }
+                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                    this["Flutter"] = isChecked
+                                }
                             }
                         )
-                        Text(
-                            text = "Flutter",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "Flutter", modifier = Modifier.padding(start = 8.dp))
                     }
 
                     Row(
@@ -249,30 +192,20 @@ fun Register() {
                             checked = selectedTechnologies["React Native"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
-                                    selectedTechnologies.toMutableMap().apply {
-                                        this["React Native"] = isChecked
-                                    }
+                                selectedTechnologies = selectedTechnologies.toMutableMap().apply {
+                                    this["React Native"] = isChecked
+                                }
                             }
                         )
-                        Text(
-                            text = "React Native",
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
+                        Text(text = "React Native", modifier = Modifier.padding(start = 8.dp))
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = email,
-                    onValueChange = {
-                                    email = it
-                    },
+                    onValueChange = { email = it },
                     label = { Text(text = "E-mail") },
-                    placeholder = {
-                        Text(
-                            text = "insira seu email"
-                        )
-                    },
+                    placeholder = { Text(text = "Insira seu e-mail") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -280,15 +213,9 @@ fun Register() {
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = password,
-                    onValueChange = {
-                                    password = it
-                    },
+                    onValueChange = { password = it },
                     label = { Text(text = "Senha") },
-                    placeholder = {
-                        Text(
-                            text = "Crie uma senha"
-                        )
-                    },
+                    placeholder = { Text(text = "Crie uma senha") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -298,7 +225,7 @@ fun Register() {
                     Text(text = "Confirmar")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                OutlinedButton(onClick = { /*TODO*/ }) {
+                OutlinedButton(onClick = { onBack() }) {
                     Text(text = "Voltar")
                 }
             }

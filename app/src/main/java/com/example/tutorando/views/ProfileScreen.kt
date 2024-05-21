@@ -2,38 +2,13 @@ package com.example.tutorando.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,31 +18,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tutorando.R
+import com.example.tutorando.models.ProfileViewModel
 
 @Composable
-fun ProfileScreen() {
-
-    var name by remember {
-        mutableStateOf("")
-    }
-
-    var about by remember {
-        mutableStateOf("")
-    }
-
-    var selectedRole by remember { mutableStateOf<Role?>(Role.MENTOR) }
-
-    var selectedTechnologies by remember {
-        mutableStateOf(
-            mapOf(
-                "Kotlin" to false,
-                "Swift" to false,
-                "Flutter" to false,
-                "React Native" to false
-            )
-        )
-    }
+fun ProfileScreen(profileViewModel: ProfileViewModel = viewModel()) {
+    val name by profileViewModel.name
+    val about by profileViewModel.about
+    val selectedRole by profileViewModel.selectedRole
+    val selectedTechnologies by profileViewModel.selectedTechnologies
 
     LazyColumn(
         modifier = Modifier
@@ -93,14 +53,14 @@ fun ProfileScreen() {
                 OutlinedTextField(
                     value = name,
                     onValueChange = {
-                        name = it
+                        profileViewModel.name.value = it
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {
                         Text(text = "Qual seu nome?")
                     },
                     shape = RoundedCornerShape(16.dp),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "Selecione sua função:")
@@ -113,7 +73,7 @@ fun ProfileScreen() {
                     ) {
                         RadioButton(
                             selected = selectedRole == Role.MENTOR,
-                            onClick = { selectedRole = Role.MENTOR },
+                            onClick = { profileViewModel.selectedRole.value = Role.MENTOR },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = colorResource(id = R.color.lightPurple)
                             )
@@ -132,7 +92,7 @@ fun ProfileScreen() {
                     ) {
                         RadioButton(
                             selected = selectedRole == Role.APRENDIZ,
-                            onClick = { selectedRole = Role.APRENDIZ },
+                            onClick = { profileViewModel.selectedRole.value = Role.APRENDIZ },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = colorResource(id = R.color.lightPurple)
                             )
@@ -156,7 +116,7 @@ fun ProfileScreen() {
                             checked = selectedTechnologies["Kotlin"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
+                                profileViewModel.selectedTechnologies.value =
                                     selectedTechnologies.toMutableMap().apply {
                                         this["Kotlin"] = isChecked
                                     }
@@ -178,7 +138,7 @@ fun ProfileScreen() {
                             checked = selectedTechnologies["Swift"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
+                                profileViewModel.selectedTechnologies.value =
                                     selectedTechnologies.toMutableMap().apply {
                                         this["Swift"] = isChecked
                                     }
@@ -200,7 +160,7 @@ fun ProfileScreen() {
                             checked = selectedTechnologies["Flutter"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
+                                profileViewModel.selectedTechnologies.value =
                                     selectedTechnologies.toMutableMap().apply {
                                         this["Flutter"] = isChecked
                                     }
@@ -222,7 +182,7 @@ fun ProfileScreen() {
                             checked = selectedTechnologies["React Native"] ?: false,
                             colors = CheckboxDefaults.colors(colorResource(id = R.color.lightPurple)),
                             onCheckedChange = { isChecked ->
-                                selectedTechnologies =
+                                profileViewModel.selectedTechnologies.value =
                                     selectedTechnologies.toMutableMap().apply {
                                         this["React Native"] = isChecked
                                     }
@@ -238,7 +198,7 @@ fun ProfileScreen() {
                 OutlinedTextField(
                     value = about,
                     onValueChange = {
-                        about = it
+                        profileViewModel.about.value = it
                     },
                     modifier = Modifier.fillMaxWidth(),
                     label = {

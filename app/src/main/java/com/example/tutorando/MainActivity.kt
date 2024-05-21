@@ -10,10 +10,16 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -33,7 +39,6 @@ import com.example.tutorando.views.ProfileScreen
 import com.example.tutorando.views.SearchScreen
 import com.example.tutorando.views.SettingsScreen
 import com.example.tutorando.views.authentication.Enter
-import com.example.tutorando.views.authentication.Register
 
 data class BottomNavigationItem(
     val title: String,
@@ -43,73 +48,12 @@ data class BottomNavigationItem(
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TutorandoTheme {
-                Register()
-//                val items = listOf(
-//                    BottomNavigationItem(
-//                        title = "Perfil",
-//                        selectedIcon = Icons.Filled.Person,
-//                        unSelectedIcon = Icons.Outlined.Person,
-//                    ),
-//                    BottomNavigationItem(
-//                        title = "Buscar",
-//                        selectedIcon = Icons.Filled.Search,
-//                        unSelectedIcon = Icons.Outlined.Search,
-//                    ),
-//                    BottomNavigationItem(
-//                        title = "Histórico",
-//                        selectedIcon = Icons.Filled.FavoriteBorder,
-//                        unSelectedIcon = Icons.Outlined.FavoriteBorder,
-//                    ),
-//                    BottomNavigationItem(
-//                        title = "Ajustes",
-//                        selectedIcon = Icons.Filled.Settings,
-//                        unSelectedIcon = Icons.Outlined.Settings,
-//                    )
-//                )
-//                var selectedItemIndex by rememberSaveable {
-//                    mutableIntStateOf(0)
-//                }
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    Scaffold(
-//                        bottomBar = {
-//                            NavigationBar {
-//                                items.forEachIndexed { index, item ->
-//                                    NavigationBarItem(
-//                                        selected = selectedItemIndex == index,
-//                                        onClick = {
-//                                            selectedItemIndex = index
-//                                        },
-//                                        label = { Text(text = item.title) },
-//                                        alwaysShowLabel = false,
-//                                        icon = {
-//                                            Icon(
-//                                                imageVector = if (index == selectedItemIndex) {
-//                                                    item.selectedIcon
-//                                                } else item.unSelectedIcon,
-//                                                contentDescription = item.title
-//                                            )
-//                                        }
-//                                    )
-//                                }
-//                            }
-//                        }
-//                    ) {
-//                        when (selectedItemIndex) {
-//                            0 -> ProfileScreen()
-//                            1 -> SearchScreen()
-//                            2 -> FavoritesScreen()
-//                            3 -> SettingsScreen()
-//                            else -> Text(text = "Tela não encontrada")
-//                        }
-//                    }
-//                }
+                Enter()
             }
         }
     }
